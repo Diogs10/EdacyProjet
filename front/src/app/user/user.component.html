@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <div class="p-4 sm:ml-64 mt-10 flex justify-center">
     <div class="h-2/3 w-full mt-10 flex flex-row flex-1 justify-around">
-        <div class="diogs taille1">  
-            <div class="font-extrabold text-4xl text-center">Professeurs</div>     
+        <div class="diogs taille1">
+            <div class="font-extrabold text-4xl text-center">Professeurs</div>
             <form class="m-5" [formGroup]="addProf" (ngSubmit)="ajoutProf()">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -24,7 +24,7 @@
                     <div>
                         <label for="specialité" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Specialité</label>
                         <input type="text" formControlName="specialite" id="specialite" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="BackEND" required>
-                    </div>  
+                    </div>
                     <div>
                         <label for="grade" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grade</label>
                         <input type="text" formControlName="grade" id="grade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="A1" required>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </form>    
+            </form>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -84,11 +84,11 @@
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
         <div>
-            <div class="diogs taille">  
-                <div class="font-extrabold text-4xl text-center">Inscription</div>     
+            <div class="diogs taille">
+                <div class="font-extrabold text-4xl text-center">Inscription</div>
                 <div class="flex items-center justify-center w-auto m-10">
                     <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6" *ngIf="!isCharge">
                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                             </svg>
@@ -96,14 +96,15 @@
                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                         </div>
                         <input id="dropzone-file" type="file" class="hidden" (change)="fichier($event)" />
+                        <img src="assets/excel2.png" alt="" *ngIf="isCharge" class="w-32 h-32">
                     </label>
                 </div>
                 <div class="m-10">
                     <button type="button" (click)="inscription()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                 </div>
             </div>
-            <div class="diogs taille2">  
-                <div class="font-extrabold text-4xl text-center">Modules</div>     
+            <div class="diogs taille2">
+                <div class="font-extrabold text-4xl text-center">Modules</div>
             <form class="m-5">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -114,7 +115,7 @@
                         <button type="button" (click)="addModule()" class=" mt-7 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                     </div>
                 </div>
-            </form>    
+            </form>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

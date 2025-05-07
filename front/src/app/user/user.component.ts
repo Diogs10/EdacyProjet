@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
   moduleAjoute !:Module
   addProf!:FormGroup
   modules:number[] = []
+  isCharge:boolean = false
 
   constructor(private profService:ProfesseurService,private formBuilder:FormBuilder,private moduleService:ModuleService){
     this.addProf = this.formBuilder.group({
@@ -62,7 +63,7 @@ export class UserComponent implements OnInit {
           title:'Error',
           icon:'error',
           text:response.message
-        }) 
+        })
       }
     });
   }
@@ -115,15 +116,14 @@ export class UserComponent implements OnInit {
   fichier(event : Event){
     const filesTarget = event.target as HTMLInputElement;
     if (filesTarget.files) {
+      this.isCharge = true
       this.fil = filesTarget.files[0];
     }
-    console.log(this.fil);
   }
 
   inscription(){
     const files = new FormData
     files.append('file',this.fil)
-    console.log(this.fil);
     this.profService.inscriptionEtudiants(files).subscribe({
       next:(response)=>{
         Swal.fire({
@@ -132,7 +132,7 @@ export class UserComponent implements OnInit {
           text:'Insertion reussi'
         })
         console.log(response);
-        
+
       },
       error:(err)=>{
         Swal.fire({
@@ -143,5 +143,5 @@ export class UserComponent implements OnInit {
       }
     })
   }
-  
+
 }
