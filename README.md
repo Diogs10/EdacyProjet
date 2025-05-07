@@ -53,5 +53,5 @@ Application web et mobile pour la **planification des cours** et la **gestion de
 3. **Acceder au front**
    cd front
    et vous y trouverez un fichier README pour bien démarrer le projet;
-4. **Acceder au front**
+4. **Format fichier excel**
 Ce fichier excel est le format qu'on attend pour la partie inscription des étudiants
