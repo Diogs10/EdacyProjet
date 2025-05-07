@@ -27,6 +27,14 @@ ng serve
 L'application sera disponible sur :
 ➡️ http://localhost:4200
 
-Pour ce connecter voici
+Pour ce connecter en tant que admin voici
 -Login : admin@example.com
+-Mot de passe : 1234
+ 
+Pour ce connecter en tant que prof voici
+-Login : professeur@example.com
+-Mot de passe : 1234
+
+Pour ce connecter en tant que attache voici
+-Login : attache@example.com
 -Mot de passe : 1234

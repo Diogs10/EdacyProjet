@@ -15,7 +15,7 @@ class AbsenceController extends Controller
 {
     //
     public function register(Request $request){
-        for ($i=0; $i < $request->absences; $i++) { 
+        for ($i=0; $i < $request->absences; $i++) {
             $absence = new Absence();
             $absence->inscription_id = $request->absences[$i];
             $absence->session_id = $request->session_id;
@@ -28,13 +28,13 @@ class AbsenceController extends Controller
             if ($ins != null) {
                 $user = User::where(['id'=>$ins->user_id])->first();
             }
-            for ($j=0; $j < count($allAbsence); $j++) { 
+            for ($j=0; $j < count($allAbsence); $j++) {
                 $nbreHeureAbsent += Session::where(['id'=>$allAbsence[$j]])->first()->duree;
             }
             if ($nbreHeureAbsent >= 10 && $nbreHeureAbsent < 20 ) {
                 $notification = Notification::where(['inscription_id'=>$request->absences[$i]])->get();
                 if (count($notification) == 0) {
-                    Mail::to($user->email)->send(new SendEmails($user->prenom));
+                    // Mail::to($user->email)->send(new SendEmails($user->prenom));
                     echo 'envoyé mail avertissement';
                     $notif =new Notification();
                     $notif->inscription_id = $request->absences[$i];
@@ -49,7 +49,7 @@ class AbsenceController extends Controller
                 $notif->description = 'Avertissement';
                 $notif->date = now();
                 $notif->save();
-                Mail::to($user->email)->send(new SendEmails($user->prenom));
+                // Mail::to($user->email)->send(new SendEmails($user->prenom));
                 echo 'envoyé mail convocation';
             }
         }

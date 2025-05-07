@@ -40,7 +40,7 @@ class UserController extends Controller
     public function byModule($id){
         $data = [];
         $classes = ModuleProf::where(['module_id'=>$id])->pluck('user_id');
-        for ($i=0; $i < count($classes); $i++) { 
+        for ($i=0; $i < count($classes); $i++) {
             array_push($data,User::where('id',$classes[$i])->first());
         }
         return response()->json([
@@ -62,13 +62,13 @@ class UserController extends Controller
         $prof->grade = $request->grade;
         $prof->specialite = $request->specialite;
         $prof->save();
-        for ($i=0; $i < count($request->modules); $i++) { 
+        for ($i=0; $i < count($request->modules); $i++) {
             $moduleProf = new ModuleProf();
             $moduleProf->module_id = $request->modules[$i];
             $moduleProf->user_id = $prof->id;
             $moduleProf->save();
         }
-        Mail::to($prof->email)->send(new SendEmails($prof->prenom));
+        // Mail::to($prof->email)->send(new SendEmails($prof->prenom));
         return response()->json([
             "statu"=>true,
             "message"=>"Insertion professeur réussi",
@@ -103,10 +103,10 @@ class UserController extends Controller
                 ]);
             }
             $idCours = [];
-            for ($i=0; $i < count($alModuleProfsId); $i++) { 
+            for ($i=0; $i < count($alModuleProfsId); $i++) {
                 $a = Cours::where(['module_prof_id'=>$alModuleProfsId[$i]->id])->get();
                 if (count($a) != 0) {
-                    for ($j=0; $j < count($a); $j++) { 
+                    for ($j=0; $j < count($a); $j++) {
                         array_push($idCours,$a[$j]->id);
                     }
                 }
@@ -120,24 +120,24 @@ class UserController extends Controller
             }
             $nbreHeure = 0;
             // dd(getdate()["mon"]);
-            for ($f=0; $f < count($idCours); $f++) { 
+            for ($f=0; $f < count($idCours); $f++) {
                 $b = Session::where(['cours_id'=>$idCours[$f],'etat'=>"1"])->get();
                 if (count($b) != 0) {
-                    for ($h=0; $h < count($b); $h++) { 
+                    for ($h=0; $h < count($b); $h++) {
                         if ($b != null) {
                             $l = explode("-",$b[$h]->date);
                             if (intval($l[1]) == getdate()["mon"]) {
                                 $nbreHeure = $nbreHeure + $b[$h]->duree;
                             }
                         }
-                    }  
+                    }
                 }
             }
             return response()->json([
                 "statu"=>true,
                 "message"=>"Le nombre d'heures faites durant ce mois",
                 "data"=>[$nbreHeure]
-            ]); 
+            ]);
         }
         $alModuleProfsId = ModuleProf::where(['user_id'=>$id,"module_id"=>$module])->first();
         if ($alModuleProfsId == null) {
@@ -150,7 +150,7 @@ class UserController extends Controller
         $idCours = [];
         $a = Cours::where(['module_prof_id'=>$alModuleProfsId->id])->get();
         if (count($a) != 0) {
-            for ($j=0; $j < count($a); $j++) { 
+            for ($j=0; $j < count($a); $j++) {
                 array_push($idCours,$a[$j]->id);
             }
         }
@@ -162,24 +162,24 @@ class UserController extends Controller
             ]);
         }
         $nbreHeure = 0;
-        for ($f=0; $f < count($idCours); $f++) { 
+        for ($f=0; $f < count($idCours); $f++) {
             $b = Session::where(['cours_id'=>$idCours[$f],'etat'=>"1"])->get();
             if (count($b) != 0) {
-                for ($h=0; $h < count($b); $h++) { 
+                for ($h=0; $h < count($b); $h++) {
                     if ($b != null) {
                         $l = explode("-",$b[$h]->date);
                         if (intval($l[1]) == getdate()["mon"]) {
                             $nbreHeure = $nbreHeure + $b[$h]->duree;
                         }
                     }
-                }  
+                }
             }
         }
         return response()->json([
             "statu"=>true,
             "message"=>"Le nombre d'heures faites durant ce mois sur ce module",
             "data"=>[$nbreHeure]
-        ]); 
+        ]);
     }
 
     public function modulebyProf($id) {
@@ -192,7 +192,7 @@ class UserController extends Controller
             ]);
         }
         $modules = [];
-        for ($i=0; $i < count($allModuleId); $i++) { 
+        for ($i=0; $i < count($allModuleId); $i++) {
             array_push($modules,new ModuleResource(Module::where(['id'=>$allModuleId[$i]])->first()));
         }
         return response()->json([
@@ -210,17 +210,17 @@ class UserController extends Controller
         // $allEtudiants = [];
         // $allClasses =[];
         // $classeAnnee = ClasseAnneeCours::where(['cours_id'=>$id])->get();
-        // for ($j=0; $j < count($classeAnnee); $j++) { 
+        // for ($j=0; $j < count($classeAnnee); $j++) {
         //     array_push($allClasses,ClasseAnnee::where(['id'=>$classeAnnee[$j]->classe_annee_id])->first());
         //     $etudiants_id = Inscription::where(['classe_annee_id'=>$classeAnnee[$j]->classe_annee_id])->pluck('user_id');
         //     $etudiants = [];
-        //     for ($i=0; $i < count($etudiants_id); $i++) { 
+        //     for ($i=0; $i < count($etudiants_id); $i++) {
         //         array_push($etudiants,new EtudiantResource(User::where(['id'=>$etudiants_id[$i]])->first()));
         //     }
         //     array_push($allEtudiants,$etudiants);
         // }
         // $CLASSES = [];
-        // for ($n=0; $n < count($allClasses); $n++) { 
+        // for ($n=0; $n < count($allClasses); $n++) {
         //     array_push($CLASSES,Classe::where(['id'=>$allClasses[$n]->classe_id])->first());
         // }
         // return response()->json([
@@ -229,12 +229,12 @@ class UserController extends Controller
         // ]);
         $allEtudiants = [];
         $classeAnnee = ClasseAnneeCours::where(['cours_id'=>$id])->get();
-        for ($j=0; $j < count($classeAnnee); $j++) { 
+        for ($j=0; $j < count($classeAnnee); $j++) {
             $a = ClasseAnnee::where(['id'=>$classeAnnee[$j]->classe_annee_id])->first();
             $b = Classe::where(['id'=>$a->classe_id])->first();
             $etudiants_id = Inscription::where(['classe_annee_id'=>$classeAnnee[$j]->classe_annee_id])->pluck('user_id');
             $etudiants = [];
-            for ($i=0; $i < count($etudiants_id); $i++) { 
+            for ($i=0; $i < count($etudiants_id); $i++) {
                 array_push($etudiants,new EtudiantResource(User::where(['id'=>$etudiants_id[$i]])->first()));
             }
             array_push($allEtudiants,["classe"=>new ClasseResource($b),"etudiants"=>$etudiants]);
