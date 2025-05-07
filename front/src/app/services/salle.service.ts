@@ -25,6 +25,27 @@ export class SalleService {
     )
   }
 
+  deleteSalle(id:number):Observable<Reponse<Salle>>{
+    const header = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.delete<Reponse<Salle>>(`${this.uri}/salle/${id}`,{headers:header}).pipe(
+      tap({
+        next: (response) => {
+          // Swal.fire({
+          //   title:'Success',
+          //   icon:'success',
+          //   text:response.message
+          // })
+        }, error: (response) => {
+          // Swal.fire({
+          //   title:'Error',
+          //   icon:'error',
+          //   text:response.message
+          // })
+        }
+      })
+    )
+  }
+
   public addSalle(objet:object):Observable<Reponse<Salle>>{
     const header = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post<Reponse<Salle>>(`${this.uri}/salle`,objet,{headers:header}).pipe(
@@ -34,15 +55,37 @@ export class SalleService {
           //   title:'Success',
           //   icon:'success',
           //   text:response.message
-          // })  
+          // })
       }, error: (response) => {
           // Swal.fire({
           //   title:'Error',
           //   icon:'error',
           //   text:response.message
-          // }) 
+          // })
       }
-        
+
+      })
+    )
+  }
+
+  public updateSalle(id:number,objet:object):Observable<Reponse<Salle>>{
+    const header = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put<Reponse<Salle>>(`${this.uri}/salle/${id}`,objet,{headers:header}).pipe(
+      tap({
+        next: (response) => {
+          // Swal.fire({
+          //   title:'Success',
+          //   icon:'success',
+          //   text:response.message
+          // })
+      }, error: (response) => {
+          // Swal.fire({
+          //   title:'Error',
+          //   icon:'error',
+          //   text:response.message
+          // })
+      }
+
       })
     )
   }

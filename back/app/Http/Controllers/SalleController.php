@@ -18,7 +18,7 @@ class SalleController extends Controller
             return response()->json([
                 "statu"=>true,
                 "message"=>"Insertion salle réussi",
-                "data"=>[new SalleResource($salle)] 
+                "data"=>[new SalleResource($salle)]
             ]);
         } catch (\Throwable $th) {
             throw $th;
@@ -30,6 +30,50 @@ class SalleController extends Controller
             "statu"=>true,
             "message"=>"Tous les salles",
             "data"=>SalleResource::collection(Salle::all())
+        ]);
+    }
+
+    public function update(SalleRequest $request, $id)
+    {
+        try {
+            // Chercher la salle par ID
+            $salle = Salle::find($id);
+
+            // Vérification de l'existence
+            if (!$salle) {
+                return response()->json([
+                    "statu" => false,
+                    "message" => "Salle non trouvée"
+                ], 404);
+            }
+
+            // Mise à jour des données
+            $salle->update([
+                'nom' => $request->nom,
+                'effectif' => $request->effectif,
+            ]);
+
+            return response()->json([
+                "statu" => true,
+                "message" => "Modification de la salle réussie",
+                "data" => new SalleResource($salle)
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                "statu" => false,
+                "message" => "Erreur lors de la mise à jour",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function delete( $id) {
+        Salle::where(['id'=>$id])->delete();
+        return response()->json([
+            "statu"=>true,
+            "message"=>"Salle supprimée",
+            "data"=>[]
         ]);
     }
 }

@@ -14,6 +14,11 @@ class Salle extends Model
         'updated_at',
     ];
 
+    protected $fillable = [
+        'nom',
+        'effectif'
+    ];
+
     public function session() : HasMany {
         return $this->hasMany(Session::class);
     }

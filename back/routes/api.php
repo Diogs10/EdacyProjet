@@ -104,6 +104,8 @@ Route::post('/semestre',[SemestreController::class,'register']);
 //salle
 Route::post('/salle',[SalleController::class,'register']);
 Route::get('/salle',[SalleController::class,'all']);
+Route::put('/salle/{id}',[SalleController::class,'update']);
+Route::delete('/salle/{id}',[SalleController::class,'delete']);
 
 
 });

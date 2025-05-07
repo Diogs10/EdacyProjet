@@ -1,5 +1,7 @@
 # 📚 Projet – Gestion Pédagogique Sonatel Academy
 
+Lien du vidéo démo : https://www.awesomescreenshot.com/video/39568589?key=4cc84bde56361bae14f54f3fa84a6717
+
 Application web et mobile pour la **planification des cours** et la **gestion des absences** à la Sonatel Academy, développée en **Laravel (Backend)**, **Angular (Web Frontend)** et **Flutter (Mobile Frontend)**.
 
 ## 🔧 Technologies utilisées
@@ -55,4 +57,3 @@ Application web et mobile pour la **planification des cours** et la **gestion de
    et vous y trouverez un fichier README pour bien démarrer le projet;
 4. **Format fichier excel**
 Ce fichier excel est le format qu'on attend pour la partie inscription des étudiants
-Lien du vidéo démo : https://www.awesomescreenshot.com/video/39558970?key=7df82bd37b6cce4f324b257b4529a058
