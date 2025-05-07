@@ -8,8 +8,6 @@
 - PHP ≥ 8.1 (⚠️ PHP 8.4 non compatible avec certains packages, préférer PHP 8.1 ou 8.2)
 - Composer
 - MySQL
-- Node.js ≥ 16
-- Angular CLI (`npm install -g @angular/cli`)
 - Un serveur web local (Laravel Valet, XAMPP, etc.)
 
 ---
