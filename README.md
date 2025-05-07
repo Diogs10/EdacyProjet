@@ -42,7 +42,7 @@ Application web et mobile pour la **planification des cours** et la **gestion de
 
 ---
 
-## 🚀 Installation (Laravel Backend)
+## 🚀 Initialisation du projet
 
 1. **Cloner le projet**
    ```bash
