@@ -8,12 +8,9 @@
 Avant de lancer le projet Angular, assurez-vous d’avoir les outils suivants installés sur votre machine :
 
 🔧 Outils requis
-  Outil	          Version                 recommandée	Installation
-  Node.js     	  v16.x ou v18.x	        https://nodejs.org
-  npm	            v8.x ou plus	          Vient avec Node.js
-  Angular CLI	    v16.2.2	                npm install -g @angular/cli
-
-- Angular CLI (`npm install -g @angular/cli`)
+- Node.js     	  v16.x ou v18.x	        https://nodejs.org
+- npm	            v8.x ou plus	          Vient avec Node.js
+- Angular CLI	    v16.2.2	                npm install -g @angular/cli
 
 ---
 
