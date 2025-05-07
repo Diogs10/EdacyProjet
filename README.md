@@ -55,3 +55,4 @@ Application web et mobile pour la **planification des cours** et la **gestion de
    et vous y trouverez un fichier README pour bien démarrer le projet;
 4. **Format fichier excel**
 Ce fichier excel est le format qu'on attend pour la partie inscription des étudiants
+Lien du vidéo démo : https://www.awesomescreenshot.com/video/39558970?key=7df82bd37b6cce4f324b257b4529a058

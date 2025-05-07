@@ -27,55 +27,55 @@ const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'cours',component:CoursComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:4
+    role:Role.Admin
   }},
   {path:'session',component:SessionComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:4
+    role:Role.Admin
   }},
   {path:'annee',component:AnneeComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:4
+    role:Role.Admin
   }},
   {path:'classe',component:ClasseComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:4
+    role:Role.Admin
   }},
   {path:'salle',component:SalleComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:4
+    role:Role.Admin
   }},
   {path:'user',component:UserComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:4
+    role:Role.Admin
   }},
   {path:'prof/cours',component:ProfCoursComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:2
+    role:Role.Prof
   }},
   {path:'prof/session',component:ProfSessionComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:2
+    role:Role.Prof
   }},
   {path:'attache/session',component:AttacheSessionComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:3
+    role:Role.Attache
   }},
   {path:'attache/demande',component:AttacheDemandeAnnulationComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:3
+    role:Role.Attache
   }},
   {path:'attache/justification',component:AttacheJustificationComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:3
+    role:Role.Attache
   }},
   {path:'absence',component:AbsenceComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:3
+    role:Role.Attache
   }},
   {path:'session/cours',component:SessionCoursComponent,canActivate: [AuthGuard,RoleGuard],
   data:{
-    role:4
+    role:Role.Admin
   }},
 ];
 

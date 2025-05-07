@@ -26,3 +26,7 @@ ng serve
 
 L'application sera disponible sur :
 ➡️ http://localhost:4200
+
+Pour ce connecter voici
+-Login : admin@example.com
+-Mot de passe : 1234
