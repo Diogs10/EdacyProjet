@@ -131,8 +131,8 @@ export class UserComponent implements OnInit {
           icon:'success',
           text:'Insertion reussi'
         })
-        console.log(response);
-
+        this.isCharge = false
+        this.fil = new File([], '')
       },
       error:(err)=>{
         Swal.fire({

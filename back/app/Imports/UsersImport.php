@@ -23,7 +23,7 @@ class UsersImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return DB::transaction(function ()use ($row) { 
+        return DB::transaction(function ()use ($row) {
             $allEmail = User::all();
             $user = new User();
             if (count($allEmail) == 0) {
@@ -37,14 +37,14 @@ class UsersImport implements ToModel, WithHeadingRow
                 $user->lieu_naissance = $row['lieu_naissance'];
                 $user->role_id = 1;
                 $user->save();
-                Mail::to($user->email)->send(new SendEmails($user->prenom));
+                // Mail::to($user->email)->send(new SendEmails($user->prenom));
 
             }
             else {
-                $a = 0; 
-                for ($i=0; $i < count($allEmail); $i++) { 
+                $a = 0;
+                for ($i=0; $i < count($allEmail); $i++) {
                     if ($row['email'] != $allEmail[$i]->email) {
-                        $a = $a + 1;                        
+                        $a = $a + 1;
                     }
                 }
                 if ($a == count($allEmail)) {
@@ -58,7 +58,7 @@ class UsersImport implements ToModel, WithHeadingRow
                     $user->lieu_naissance = $row['lieu_naissance'];
                     $user->role_id = 1;
                     $user->save();
-                    Mail::to($user->email)->send(new SendEmails($user->prenom));
+                    // Mail::to($user->email)->send(new SendEmails($user->prenom));
 
                 }
                 else {
@@ -80,7 +80,7 @@ class UsersImport implements ToModel, WithHeadingRow
                 $inscription->save();
             }
 
-            return $user; 
+            return $user;
         });
     }
 }
