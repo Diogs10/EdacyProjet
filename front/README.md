@@ -1,5 +1,5 @@
 # Front
-cd frontend
+cd front
 
 # Installer les dépendances
 npm install

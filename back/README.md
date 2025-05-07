@@ -19,6 +19,7 @@
 ### 1. Backend Laravel (`/backend`)
 
 ```bash
+    cd back
 
 # Installer les dépendances PHP
 composer install
