@@ -1,0 +1,74 @@
+<app-prof-navbar></app-prof-navbar>
+<div class="p-4 sm:ml-64 mt-10">
+    <div class="flex">
+        <div class="m-2">
+            <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+            <select id="" (change)="filtreCours($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="2">Toutes les cours</option>
+            <option value="1">Terminé</option>
+            <option value="0">En Cours</option>
+            </select>
+        </div>
+        <div class="m-2">
+            <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dans ce mois : {{nbreHeure}}H</label>
+            <select id="" (change)="profModule($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="0">Toutes les modules</option>
+            <option *ngFor="let module of moduleByProf?.data" value="{{module.id}}">{{module.libelle}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="flex flex-row flex-wrap" >
+        <div *ngFor="let cours of coursProfs?.data" class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">{{cours.module_prof_id.module}}, {{cours.module_prof_id.professeur.prenom}} {{cours.module_prof_id.professeur.nom}}</h5>
+            <div class="flex items-baseline text-gray-900 dark:text-white">
+                <span class="text-5xl font-extrabold tracking-tight">{{cours.heureTotal}}</span>
+                <span class="text-3xl font-semibold">h</span>
+                <span class="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">/{{cours.semestre_id.libelle}}</span>
+            </div>
+            <ul role="list" class="space-y-5 my-7">
+                <li class="flex space-x-3 items-center" *ngFor="let classe of cours?.classes">
+                    <svg class="flex-shrink-0 w-4 h-4 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{{classe.classe_id.filiere}} {{classe.classe_id.niveau}}</span>
+                </li>
+                <li class="flex space-x-3">
+                    <svg class="flex-shrink-0 w-4 h-4 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">20GB Cloud storage</span>
+                </li>
+                <li class="flex space-x-3">
+                    <svg class="flex-shrink-0 w-4 h-4 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Integration help</span>
+                </li>
+                <li class="flex space-x-3 line-through decoration-gray-500">
+                    <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500">Sketch Files</span>
+                </li>
+                <li class="flex space-x-3 line-through decoration-gray-500">
+                    <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500">API Access</span>
+                </li>
+                <li class="flex space-x-3 line-through decoration-gray-500">
+                    <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500">Complete documentation</span>
+                </li>
+                <li class="flex space-x-3 line-through decoration-gray-500">
+                    <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

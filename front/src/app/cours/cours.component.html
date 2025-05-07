@@ -1,0 +1,237 @@
+<app-navbar></app-navbar>
+  <div class="p-4 sm:ml-64 mt-10">
+    <div class="flex">
+        <div class="mt-9 ml-2 mr-2 mb-2">
+            <!-- Modal toggle -->
+            <button data-modal-target="add-cours-modal" data-modal-toggle="add-cours-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+              Ajouter Cours
+            </button>
+        </div>
+        <div class="m-2">
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+            <select id="countries" (change)="filtreCours($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="2">Toutes les cours</option>
+            <option value="1">Terminé</option>
+            <option value="0">En Cours</option>
+            </select>
+        </div>
+    <!-- <form>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+        <input (change)="fichier($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+
+        <button type="button" (click)="inscription()"class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Inscription</button>
+    </form> -->
+
+        
+        <!-- Main modal -->
+        <div id="add-cours-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="add-cours-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Fermer</span>
+                    </button>
+                    <div class="px-6 py-6 lg:px-8">
+                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter Cours</h3>
+                        <form class="space-y-6" [formGroup]="addCours" (ngSubmit)="ajoutCours()">
+                            <div> 
+                                <label for="module" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Module</label>
+                                <select id="module" (change)="chargerProf()" formControlName="module" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option  *ngFor="let module of allModule?.data" value={{module.id}}>{{module.libelle}}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="professeur" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Professeur</label>
+                                <select id="professeur" formControlName="professeur" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option  *ngFor="let prof of allProf?.data" value={{prof.id}}>{{prof.prenom}} {{prof.nom}}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="semestre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre</label>
+                                <select id="semestre" formControlName="semestre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option *ngFor="let semestre of allSemestre?.data" value={{semestre.id}}>{{semestre.libelle}}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="heureTotal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Heure Total en Heures</label>
+                                <input type="number" min="1" formControlName="heureTotal" name="heureTotal" id="heureTotal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="20" required>
+                            </div>
+                            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Classes</h3>
+                            <div class="flex flex-wrap">
+                                <div class="flex items-center mr-4" *ngFor="let classe of allClasse?.data">
+                                    <input id="{{classe.id}}" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 check">
+                                    <label for="{{classe.id}}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{classe.filiere}} {{classe.niveau}}</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+        <div class="flex flex-row flex-wrap" >
+            <div *ngFor="let cours of allCours?.data" class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">{{cours.module_prof_id.module}}, {{cours.module_prof_id.professeur.prenom}} {{cours.module_prof_id.professeur.nom}}</h5>
+                <div class="flex items-baseline text-gray-900 dark:text-white">
+                    <span class="text-5xl font-extrabold tracking-tight">{{cours.heureTotal}}</span>
+                    <span class="text-3xl font-semibold">h</span>
+                    <span class="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">/{{cours.semestre_id.libelle}}</span>
+                </div>
+                <ul role="list" class="space-y-5 my-7">
+                    <li class="flex space-x-3 items-center" *ngFor="let classe of cours?.classes">
+                        <svg class="flex-shrink-0 w-4 h-4 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{{classe.classe_id.filiere}} {{classe.classe_id.niveau}}</span>
+                    </li>
+                    <li class="flex space-x-3">
+                        <svg class="flex-shrink-0 w-4 h-4 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">20GB Cloud storage</span>
+                    </li>
+                    <li class="flex space-x-3">
+                        <svg class="flex-shrink-0 w-4 h-4 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Integration help</span>
+                    </li>
+                    <li class="flex space-x-3 line-through decoration-gray-500">
+                        <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="text-base font-normal leading-tight text-gray-500">Sketch Files</span>
+                    </li>
+                    <li class="flex space-x-3 line-through decoration-gray-500">
+                        <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="text-base font-normal leading-tight text-gray-500">API Access</span>
+                    </li>
+                    <li class="flex space-x-3 line-through decoration-gray-500">
+                        <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="text-base font-normal leading-tight text-gray-500">Complete documentation</span>
+                    </li>
+                    <li class="flex space-x-3 line-through decoration-gray-500">
+                        <svg class="flex-shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
+                    </li>
+                </ul>
+                <div class="flex flex-row"> 
+                    <a href="/session/cours" id="{{cours.id}}" (click)="recupIdCours($event)" class="text-green-500">VOIR PLUS</a>
+                    <!-- <button type="button" data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" id="{{cours.id}}" class="text-white bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center m-1" (click)="detailCours($event)">Voir plus</button>
+                    <button *ngIf="cours.termine == '0'" id="{{cours.id}}" type="button" data-modal-target="add-session-modal" data-modal-toggle="add-session-modal" (click)="recupIdCours($event)" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center m-1">Add Session</button> -->
+                </div>
+            </div>
+        </div>
+  </div>
+
+
+
+  
+<!-- session -->
+<!-- <div id="add-session-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="add-session-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Fermer</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter Session</h3>
+                <form class="space-y-6" [formGroup]="addSession" (ngSubmit)="ajoutSession()">
+                    <div>
+                        <label for="heureDebut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Heure debut Heures</label>
+                        <input type="number" min="8" max="23" formControlName="heureDebut" name="heureDebut" id="heureDebut" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="20" required>
+                    </div>
+                    <div>
+                        <label for="duree" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duree en Heures</label>
+                        <input type="number" min="1" max="15" formControlName="duree" name="duree" id="duree" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="2" required>
+                    </div>
+                    <div class="flex">
+                        <div class="flex items-center mr-4">
+                            <input id="type" type="checkbox" value="1" formControlName="type" (change)="presenceChecked()" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="type" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">En Ligne</label>
+                        </div>
+                    </div>
+                    <div *ngIf="this.presentiel"> 
+                        <label for="salle_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Salle</label>
+                        <select id="salle_id" formControlName="salle_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option *ngFor="let salle of allSalle?.data" value={{salle.id}}>{{salle.nom}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="salle_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                        <input type="date" formControlName="date" name="duree" id="duree" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="2" required>
+                    </div>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- voir plus -->
+  
+  <!-- Main modal -->
+  <!-- <div id="crypto-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-md max-h-full">
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="crypto-modal">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+              </button>
+              <div class="px-6 py-4 border-b rounded-t dark:border-gray-600">
+                  <h3 class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white">
+                      Connect wallet
+                  </h3>
+              </div>
+              <div class="p-6">
+                    <div class="relative overflow-x-auto">
+                        <h2></h2>
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Nom
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Prenom
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Email
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Apple MacBook Pro 17"
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        Silver
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Laptop
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+              </div>
+          </div>
+      </div>
+  </div>
+   -->
